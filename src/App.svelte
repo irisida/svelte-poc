@@ -1,20 +1,21 @@
 <script>
-  import Obj from './components/Obj.svelte';
-  import List from './components/List.svelte';
-
-  import Renderer from './components/Renderer.svelte';
+  // Components
+  import Navbar from './components/Navbar.svelte';
   import ViewAdd from './components/ViewAdd.svelte';
-
-  const date = Date.now() / 1000;
-
-  const content = `# markdown here!
-  Here's a **markdown** based post.`;
+  import ViewObject from './components/ViewObject.svelte';
+  import ViewList from './components/ViewList.svelte';
+  // Stores
+  import { view } from './stores.js';
 </script>
 
-<Obj objectId="00000000-0000-0000-0000-00000000" />
+<Navbar />
 
-<Renderer title="hello" {content} />
-
-<List {date} />
-
-<ViewAdd />
+<div class="container mx-auto w-full lg:w-3/5 px-2 pt-2 mt-2">
+  {#if $view == 'add'}
+    <ViewAdd />
+  {:else if $view && $view.startsWith('view/')}
+    <ViewObject objectId={$view.substring(5)} />
+  {:else}
+    <ViewList />
+  {/if}
+</div>

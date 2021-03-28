@@ -4,10 +4,10 @@
   import { LoadObject } from '../lib/Requests.js';
   import { token } from '../stores.js';
 
-  export let ObjectId = null;
+  export let objectId = null;
   let contentPromise = Promise.resolve({});
 
-  $: contentPromise = LoadObject(ObjectId, $token);
+  $: contentPromise = LoadObject(objectId, $token);
 </script>
 
 {#await contentPromise}
