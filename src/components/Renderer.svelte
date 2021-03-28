@@ -1,6 +1,10 @@
 <script>
   export let title = '';
   export let content = '';
+  import MarkdownIt from 'markdown-it';
+  const markdown = new MarkdownIt();
+
+  $: rendered = markdown.render(content);
 </script>
 
 {#if title}
@@ -11,7 +15,7 @@
 
 <div class="rendered">
   {#if content}
-    {content}
+    {@html rendered}
   {:else}
     <p class="text-gray-600">No content</p>
   {/if}
